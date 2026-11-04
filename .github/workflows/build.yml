@@ -19,8 +19,8 @@ jobs:
         run: |
           echo "Rozpakowywanie pliku ZIP..."
           unzip -q -o AeroNav-Full-Source-Code.zip -d extracted_code
-          # Kopiujemy zawartość rozpakowanego folderu bezpośrednio do głównego katalogu
-          cp -R extracted_code/AeroNav-iOS-Xcode/* . || cp -R extracted_code/* .
+          cp -R extracted_code/AeroNav-iOS-Xcode/* .
+          rm -rf extracted_code
           ls -la
 
       - name: Wybierz wersję Xcode
@@ -59,4 +59,5 @@ jobs:
         with:
           name: AeroNav-iOS-App-IPA
           path: build/AeroNav-iOS.ipa
-          retention-days: 14 
+          retention-days: 14
+.
