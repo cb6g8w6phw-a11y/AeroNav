@@ -60,4 +60,3 @@ jobs:
           name: AeroNav-iOS-App-IPA
           path: build/AeroNav-iOS.ipa
           retention-days: 14
-.
