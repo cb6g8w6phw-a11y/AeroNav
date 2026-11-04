@@ -15,13 +15,14 @@ jobs:
       - name: Pobierz kod repozytorium
         uses: actions/checkout@v4
 
-      - name: Rozpakuj archiwum z kodem źródłowym
+           - name: Rozpakuj archiwum z kodem źródłowym
         run: |
           echo "Rozpakowywanie pliku ZIP..."
-          unzip -q -o AeroNav-Full-Source-Code.zip -d extracted_code
+          unzip -q -o "AeroNav-iOS-Xcode-Project .zip" -d extracted_code
           cp -R extracted_code/AeroNav-iOS-Xcode/* .
           rm -rf extracted_code
           ls -la
+
 
       - name: Wybierz wersję Xcode
         run: |
