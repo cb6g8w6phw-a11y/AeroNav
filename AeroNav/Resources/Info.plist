@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleName</key>
+    <string>AeroNav</string>
+    <key>CFBundleDisplayName</key>
+    <string>AeroNav</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.aeronav.navigation</string>
+    <key>CFBundleVersion</key>
+    <string>1.0.0</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0</string>
+    <key>LSRequiresIPhoneOS</key>
+    <true/>
+    <key>NSSupportsLiveActivities</key>
+    <true/>
+    <key>NSSupportsLiveActivitiesFrequentUpdates</key>
+    <true/>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>AeroNav potrzebuje dostępu do Twojej lokalizacji, aby wyznaczać trasy w czasie rzeczywistym i ostrzegać przed fotoradarami.</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>AeroNav monitoruje trasę w tle oraz w tunelach (Dead Reckoning) dla zapewnienia ciągłości nawigacji.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>AeroNav używa mikrofonu do sterowania głosowego nawigacją podczas jazdy.</string>
+    <key>NSSpeechRecognitionUsageDescription</key>
+    <string>Rozpoznawanie głosu pozwala na bezpieczne wydawanie poleceń bez odrywania rąk od kierownicy.</string>
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>location</string>
+        <string>audio</string>
+        <string>fetch</string>
+    </array>
+    <key>UILaunchScreen</key>
+    <dict/>
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+</dict>
+</plist>
