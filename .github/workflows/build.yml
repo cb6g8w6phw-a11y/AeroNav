@@ -20,6 +20,11 @@ jobs:
           sudo xcode-select -s /Applications/Xcode_16.0.app || true
           xcodebuild -version
 
+      - name: Pobierz platformę iOS (potrzebna dla actool)
+        run: |
+          xcrun simctl list runtimes
+          xcodebuild -downloadPlatform iOS
+
       - name: Zainstaluj XcodeGen
         run: brew install xcodegen
 
