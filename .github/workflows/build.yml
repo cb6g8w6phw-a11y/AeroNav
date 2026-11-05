@@ -1,54 +1,24 @@
-name: Build iOS App (.ipa)
-
-on:
-  push:
-    branches: [ main, master ]
-  workflow_dispatch:
-
-jobs:
-  build-ios:
-    name: Budowanie projektu iOS i eksport pliku .ipa
-    runs-on: macos-15
-    timeout-minutes: 45
-
-    steps:
-      - name: Pobierz kod repozytorium
-        uses: actions/checkout@v4
-
-      - name: Wybierz wersję Xcode
-        run: |
-          sudo xcode-select -s /Applications/Xcode_16.0.app || true
-          xcodebuild -version
-
-      - name: Zainstaluj XcodeGen
-        run: brew install xcodegen
-
-      - name: Wygeneruj projekt Xcode (.xcodeproj)
-        run: xcodegen generate
-
       - name: Budowanie aplikacji i tworzenie archiwum (.xcarchive)
         run: |
           mkdir -p build
-          xcodebuild archive \
+          xcodebuild build \
             -project AeroNav.xcodeproj \
             -scheme AeroNav \
             -destination "generic/platform=iOS" \
             -configuration "Release" \
-            -archivePath "build/AeroNav.xcarchive" \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGN_IDENTITY=""
+            CODE_SIGN_IDENTITY="" \
+            SYMROOT="$(pwd)/build/DerivedData"
 
       - name: Spakuj do pliku .ipa (Payload)
         run: |
           mkdir -p build/Payload
-          APP_PATH=$(find build/AeroNav.xcarchive -name "*.app" -type d | head -n 1)
+          APP_PATH=$(find build/DerivedData -name "AeroNav.app" -type d | head -n 1)
+          if [ -z "$APP_PATH" ]; then
+            APP_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "AeroNav.app" -type d | head -n 1)
+          fi
+          echo "Znaleziono aplikację w: $APP_PATH"
           cp -r "$APP_PATH" build/Payload/
+          chmod +x build/Payload/AeroNav.app/AeroNav || true
           cd build && zip -r -q "AeroNav-iOS.ipa" Payload && cd ..
-
-      - name: Udostępnij gotowy plik .ipa do pobrania
-        uses: actions/upload-artifact@v4
-        with:
-          name: AeroNav-iOS-App-IPA
-          path: build/AeroNav-iOS.ipa
-          retention-days: 14
